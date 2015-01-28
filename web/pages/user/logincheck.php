@@ -25,4 +25,5 @@ if (!$success)
 //Ustawianie danych sesji
 $_SESSION["isLogged"] = "1";
 $_SESSION["username"] = $_POST['username'];
-$_SESSION["userId"] = $user->getId($_POST['username'])[0]['user_id'];
+$_SESSION["userId"] = $user->getByName($_POST['username'])[0]['id'];
+
