@@ -8,7 +8,7 @@ session_start();
           <a class="navbar-brand" href="#">Sklep z filmami</a>
         </div>
        <?php  // Sprawdzanie czy użytkownik jest zalogowany, jeśli tak to nie wyświetla menu do zalogowania
-       if ($_SESSION["isLogged"]==0) 
+       if ($_SESSION["isLogged"] != 1) 
         {
         ?>   
             <div id="navbar" class="navbar-collapse collapse">
