@@ -11,7 +11,7 @@ class Movie {
 	//funkcja tworząca nowy film
 	function create($title, $description, $price){
 		// Zwaraca true w przypadku pomyslnego utworzenia użytkownika
-		if ($this->db->query("INSERT INTO `movies` (`title`, `desciption`, `price`) VALUES ('$title', '$description', '$price');"))
+		if ($this->db->query("INSERT INTO `movies` (`title`, `description`, `price`) VALUES ('$title', '$description', '$price');"))
 			return true; else
 			return false;
 
@@ -22,5 +22,9 @@ class Movie {
 		return $this->db->query("SELECT * FROM `movies`")->getResult();
 	}
 
+	//pobieranei filmu po id
+	function getById($movieId){
 
+		return $this->db->query("SELECT * FROM `movies` WHERE `id`='$movieId'")->getResult();
+	}
 }

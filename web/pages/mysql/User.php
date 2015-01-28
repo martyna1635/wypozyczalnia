@@ -37,5 +37,10 @@ class User {
 		
 		return $result->theResult;
 	}
+	//pobieranei filmu po id
+	function getById($userId){
+
+		return $this->db->query("SELECT * FROM `users` WHERE `id`='$userId'")->getResult();
+	}
 }
 
