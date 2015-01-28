@@ -1,5 +1,5 @@
 <?PHP
-require 'mysql/User.php';
+require '../mysql/User.php';
 
 
 header('Content-Type: application/json');

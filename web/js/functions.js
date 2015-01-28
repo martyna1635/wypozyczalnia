@@ -49,7 +49,7 @@ function checkPasswords(input) {
 function checkLogin(input) {
 
     if (input.value.length > 3){
-        $.getJSON( "/pages/users/checkUserName.php?login="+input.value, 
+        $.getJSON( "/pages/user/checkUserName.php?login="+input.value, 
           function( data )
           {    
             // Pobieramy dane ze strony PHP (która łączy się z baza danych i daje nam odpowiedź czy login jest juz w bazie)
@@ -81,7 +81,7 @@ function registration(){
 function login(){
   if (!showLoginError())
     return;
-    $.post( 'pages/users/logincheck.php', $('form#loginForm').serialize(), function(data) {
+    $.post( 'pages/user/logincheck.php', $('form#loginForm').serialize(), function(data) {
          // Jeśli pomyślnie się zalogowalismy przeładuj pasek navigation.php
          if (data.success != 1){
           // Wyswietl że błędny login lub hasło (działa prawdopodobnie tylok na chromie)
