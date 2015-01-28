@@ -7,7 +7,7 @@ function loadNavigation(){
 }
 function loadProducts(){
 
-  $('#products').load('/pages/products.php');
+  $('#products').load('/pages/movie/products.php');
 }
 //Pokazywanie błędow np. login jest zajęty przy rejestracji -->
 function showRegError(){
@@ -43,7 +43,7 @@ function checkPasswords(input) {
 function checkLogin(input) {
 
     if (input.value.length > 3){
-        $.getJSON( "/pages/checkUserName.php?login="+input.value, 
+        $.getJSON( "/pages/users/checkUserName.php?login="+input.value, 
           function( data )
           {    
             // Pobieramy dane ze strony PHP (która łączy się z baza danych i daje nam odpowiedź czy login jest juz w bazie)
@@ -64,15 +64,18 @@ function checkLogin(input) {
 // Funkcja wysyłające dane do rejestracji
 function registration(){
   showRegError();
-  // sprawdzamy czy hasła sa takie same
- // checkPasswords();
+  // Wysyłanie postu do tworzenia nowego konta
+  $.post( 'pages/user/createUser.php', $('#registrationForm').serialize(), function(data){
+    showAlert('Pomyslnie dodano nowe konto', 'Zarejestrowano');
+
+  }, 'JSON');
 }
 
 // funkcja odpowiedzialna za logowanie
 function login(){
   if (!showLoginError())
     return;
-    $.post( 'pages/logincheck.php', $('form#loginForm').serialize(), function(data) {
+    $.post( 'pages/users/logincheck.php', $('form#loginForm').serialize(), function(data) {
          // Jeśli pomyślnie się zalogowalismy przeładuj pasek navigation.php
          if (data.success != 1){
           // Wyswietl że błędny login lub hasło (działa prawdopodobnie tylok na chromie)
@@ -89,7 +92,7 @@ function login(){
 }
 // funkcja odpowiedzialna za wylogowywanie
 function logout(){
-    $.get('pages/logout.php');
+    $.get('pages/user/logout.php');
     showAlert('Pomyslnie zostałeś wylogowany', 'wylogowano');
 
     reload = true;
