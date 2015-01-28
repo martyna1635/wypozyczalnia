@@ -47,31 +47,17 @@
                 <li class="disabled" data-toggle="tooltip"  data-placement="bottom" data-original-title="Musisz się zaglogować jako administrator">
                   <a href="#">Zobacz listę wszystkich zakupów</a>
                 </li>
-                <li class="dropdown pull-right">
-                   <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown<strong class="caret"></strong></a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a href="#">Action</a>
-                    </li>
-                    <li>
-                      <a href="#">Another action</a>
-                    </li>
-                    <li>
-                      <a href="#">Something else here</a>
-                    </li>
-                    <li class="divider">
-                    </li>
-                    <li>
-                      <a href="#">Separated link</a>
-                    </li>
-                  </ul>
-                </li>
               </ul>
+      <div class="alert alert-success alert-dismissable" id="alert" style="display:none;">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <div id="alertMessage"></div>
+      </div>
           <div class="page-header">
           <h1>
             Strona z filmami <small>Wybierz i kup film</small>
           </h1>
         </div>
+
           <div class="row" id="products">
             <!-- Produkty ładowane przez jQuery z użyciem ajaxa (na dole strony skrypt ładujący) -->
           </div>
@@ -177,7 +163,7 @@
           function checkLogin(input) {
 
               if (input.value.length > 3){
-                  $.getJSON( "/pages/checkUserName.php?"+input.value, 
+                  $.getJSON( "/pages/checkUserName.php?login="+input.value, 
                     function( data )
                     {    
                       // Pobieramy dane ze strony PHP (która łączy się z baza danych i daje nam odpowiedź czy login jest juz w bazie)
@@ -216,6 +202,19 @@
                  },
                  'json' // I expect a JSON response
               );
+          }
+          // funkcja odpowiedzialna za wylogowywanie
+          function logout(){
+              $.get('pages/logout.php');
+              showAlert('Pomyslnie zostałeś wylogowany', 'wylogowano');
+
+          }
+          //funkcja wyświetlająca aktualne wiadomośc (np. wylogowano)
+          function showAlert(message, title){
+            $('#alertMessage').html("<strong>"+title+"!</strong> "+message+".");
+            $('#alert').fadeIn('slow');
+            // przez 2,5 s pokazuje info
+            setTimeout(function(){ $('#alert').fadeOut('slow') }, 2500);
           }
         </script
     </body>
