@@ -198,6 +198,7 @@
                     // Wyswietl że błędny login lub hasło (działa prawdopodobnie tylok na chromie)
                       document.getElementById('password').setCustomValidity('Błędny login lub hasło');
                       showLoginError();
+                      //setTimeout(function(){document.getElementById('password').setCustomValidity('')}, 2000);
                    }
                  },
                  'json' // I expect a JSON response
