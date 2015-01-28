@@ -1,7 +1,8 @@
 <?PHP
-// Umportowanie klasy user
 session_start();
-require 'mysql/User.php';
+// Umportowanie klasy user
+
+require '../mysql/User.php';
 // Ustawianie nagłówków dla ajax (json)
 header('Content-Type: application/json');
 
@@ -24,3 +25,4 @@ if (!$success)
 //Ustawianie danych sesji
 $_SESSION["isLogged"] = "1";
 $_SESSION["username"] = $_POST['username'];
+$_SESSION["userId"] = $user->getByName($_POST['username'])[0]['id'];

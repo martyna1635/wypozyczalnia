@@ -43,7 +43,7 @@ class User {
 		return $this->db->query("SELECT * FROM `users` WHERE `id`='$userId'")->getResult();
 	}
 	//pobieranei id użytkownika po nazwie
-	function getById($username){
+	function getByName($username){
 
 		return $this->db->query("SELECT * FROM `users` WHERE `username`='$username'")->getResult();
 	}
