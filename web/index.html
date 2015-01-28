@@ -39,14 +39,21 @@
         <div class="col-md-12 column">
         <ul class="nav nav-tabs">
                 <li class="active">
-                  <a href="#">Strona główna</a>
+                  <a href="/">Strona główna</a>
                 </li>
-                <li class="disabled" data-toggle="tooltip"  data-placement="bottom" data-original-title="Musisz się zaglogować">
+                <li id="showOrders" class="disabled" data-toggle="tooltip"  data-placement="bottom" data-original-title="Musisz się zaglogować">
                   <a href="#">Zobacz liste moich zakupów</a>
                 </li>
-                <li class="disabled" data-toggle="tooltip"  data-placement="bottom" data-original-title="Musisz się zaglogować jako administrator">
-                  <a href="#">Zobacz listę wszystkich zakupów</a>
-                </li>
+             <ul class="nav navbar-nav" id="showAllOrders">
+                       <li class="disabled" class="dropdown pull-right" data-toggle="tooltip"  data-placement="bottom" data-original-title="Musisz się zaglogować jako administrator">
+                         <a class="disabled" href="#" data-toggle="dropdown" class="dropdown-toggle" style="padding:10px 10px;">Zarządzaj filmami<strong class="caret"></strong></a>
+                        <ul class="dropdown-menu">
+                          <li><a onclick="showAll()" href="#">Zobacz wszystkie zakupione</a> </li>
+                          <li><a onclick="addMovie()" href="#">Dodaj nowy film</a></li>
+                          <li><a onclick="movieManage()" href="#">Zarządzaj filmami</a></li>
+                        </ul>
+                      </li>
+                 </ul>
               </ul>
       <div class="alert alert-success alert-dismissable" id="alert" style="display:none;">
          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -116,107 +123,16 @@
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
 
-        <script>
+        // Ładuje wszystkie funkcje obsługujące stronę
+        <script src="js/functions.js"> </script>
+        <script type="text/javascript">
         // Ładuj obsłgue tooltipów (podpowiedzi)
           $(document).ready(function(){
               $('[data-toggle="tooltip"]').tooltip();   
           });
-
-          function loadNavigation(){
-            $('nav').load('/pages/navigation.php');
-          }
-          function loadProducts(){
-            $('#products').load('/pages/products.php');
-          }
-          //Pokazywanie błędow np. login jest zajęty przy rejestracji -->
-          function showRegError(){
-            var $myForm = $('#registrationForm')
-                            if (!$myForm[0].checkValidity()) {
-                              // If the form is invalid, submit it. The form won't actually submit;
-                              // this will just cause the browser to display the native HTML5 error messages.
-                              $myForm.find(':submit').click()
-                            }
-          }
-
-          function showLoginError(){
-            var $myForm = $('form#loginForm');
-            if (!$myForm[0].checkValidity()) {
-                              $myForm.find(':submit').click();
-                              return false;
-            }
-            return true;
-          }
           loadNavigation();
           loadProducts();
 
-          // Funkcja wykorzystująca możliwosci HTML5 do sprawdzania czy hasła są takie same przy rejestracji
-          function checkPasswords(input) {
-              if (input.value != document.getElementById('reg_password').value) {
-                  input.setCustomValidity('Hasła muszą byc takie same!');
-              } else {
-                  // input is valid -- reset the error message
-                  input.setCustomValidity('');
-             }
-          
-          }
-          // Funkcja sprawdzająca czy login jest wolny
-          function checkLogin(input) {
-
-              if (input.value.length > 3){
-                  $.getJSON( "/pages/checkUserName.php?login="+input.value, 
-                    function( data )
-                    {    
-                      // Pobieramy dane ze strony PHP (która łączy się z baza danych i daje nam odpowiedź czy login jest juz w bazie)
-                      if (data.isFree != 1)
-                      {
-                          //Wykorzusyujemy dobrodziejstwa HTML5 (niestety prawdopodbnie strona będzie dzialac poprawnie tylko na CHROMIE)
-                          input.setCustomValidity('Ten login jest zajęty'); 
-                          showRegError();
-                      } else {
-                            // input is valid -- reset the error message
-                            input.setCustomValidity('');
-                       }
-                        });
-                }
-          
-          }
-
-          // Funkcja wysyłające dane do rejestracji
-          function registration(){
-            showRegError();
-            // sprawdzamy czy hasła sa takie same
-           // checkPasswords();
-          }
-
-          // funkcja odpowiedzialna za logowanie
-          function login(){
-            if (!showLoginError())
-              return;
-              $.post( 'pages/logincheck.php', $('form#loginForm').serialize(), function(data) {
-                   // Jeśli pomyślnie się zalogowalismy przeładuj pasek navigation.php
-                   if (data.success != 1){
-                    // Wyswietl że błędny login lub hasło (działa prawdopodobnie tylok na chromie)
-                      document.getElementById('password').setCustomValidity('Błędny login lub hasło');
-                      showLoginError();
-                      //setTimeout(function(){document.getElementById('password').setCustomValidity('')}, 2000);
-                   }
-                 },
-                 'json' // I expect a JSON response
-              );
-          }
-          // funkcja odpowiedzialna za wylogowywanie
-          function logout(){
-              $.get('pages/logout.php');
-              showAlert('Pomyslnie zostałeś wylogowany', 'wylogowano');
-
-          }
-          //funkcja wyświetlająca aktualne wiadomośc (np. wylogowano)
-          function showAlert(message, title){
-            $('#alertMessage').html("<strong>"+title+"!</strong> "+message+".");
-            $('#alert').fadeIn('slow');
-            // przez 2,5 s pokazuje info
-            setTimeout(function(){ $('#alert').fadeOut('slow') }, 2500);
-          }
-        </script
+        </script>
     </body>
 </html>
