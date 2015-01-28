@@ -1,6 +1,6 @@
 <?php
 require_once('Database.php');
-class User {
+class Movie {
 	// zmienna przetrzymujaca obiekt bazy danych
 	private $db; 
 	function __construct()
@@ -8,20 +8,23 @@ class User {
 		$this->db = new Database();
 	}
 
-	//funkcja tworząca nowego użytkownika
-	function create($name, $password){
+	//funkcja tworząca nowy film
+	function create($title, $description, $price){
+		// Zwaraca true w przypadku pomyslnego utworzenia użytkownika
+		if ($this->db->query("INSERT INTO `movies` (`title`, `description`, `price`) VALUES ('$title', '$description', '$price');"))
+			return true; else
+			return false;
 
-		return true;
 	}
-	//funkcja sprawdzająca czy login nie jest juz zajęty
-	function loginExist($name){
-		return true;
-	}
+	//pobieramy wszystkie filmy i wysyłamy je do "obróbki" dalej
+	function getAll(){
 
-	//sprawdzanie czy login i hasło sa poprawne
-	function checkAuth($name, password){
-
-		return true;
+		return $this->db->query("SELECT * FROM `movies`")->getResult();
 	}
 
+	//pobieranei filmu po id
+	function getById($movieId){
+
+		return $this->db->query("SELECT * FROM `movies` WHERE `id`='$movieId'")->getResult();
+	}
 }
