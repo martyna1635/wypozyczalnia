@@ -1,9 +1,15 @@
 var reload = false;
+// zmienna do blokowania menu
+var locked = true;
+
 function loadNavigation(){
   if (reload)
     $('nav').hide().load('/pages/navigation.php').fadeIn('slow');
     else
     $('nav').load('/pages/navigation.php');
+
+
+    $('#showOrders').attr('class', (locked)?'disabled':'');
 }
 function loadProducts(){
 
@@ -84,6 +90,9 @@ function login(){
             //setTimeout(function(){document.getElementById('password').setCustomValidity('')}, 2000);
          } else if (data.success == 1){
             reload = true;
+            //został zalogowany, może korzystać z dodtakowych opcji w menu
+            locked = false;
+            //Przeładuj pasek nawigacji
             loadNavigation();
          }
        },
@@ -96,7 +105,7 @@ function logout(){
     showAlert('Pomyslnie zostałeś wylogowany', 'wylogowano');
 
     reload = true;
-
+    locked = true;
     loadNavigation();
 }
 //funkcja wyświetlająca aktualne wiadomośc (np. wylogowano)
@@ -105,4 +114,28 @@ function showAlert(message, title){
   $('#alert').fadeIn('slow');
   // przez 2,5 s pokazuje info
   setTimeout(function(){ $('#alert').fadeOut('slow') }, 2500);
+}
+
+
+function showOrders()
+{
+  // Jesli menu jest zablokowane to nie rób nic
+  if (locked) return;
+    $('#products').fadeOut("slow").load('pages/orders/show.php').fadeIn("slow");
+}
+function showAllOrders()
+{
+  if (locked) return;
+    $('#products').fadeOut("slow").load('pages/orders/show.php?all=1').fadeIn("slow");
+}
+function addMovie()
+{
+  if (locked) return;
+    $('#products').fadeOut("slow").load('pages/movie/add.php').fadeIn("slow");
+}
+function movieManage()
+{
+  if (locked) return;
+    $('#products').fadeOut("slow").load('pages/movie/manage.php').fadeIn("slow");
+
 }

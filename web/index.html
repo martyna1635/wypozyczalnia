@@ -41,14 +41,14 @@
                 <li class="active">
                   <a href="/">Strona główna</a>
                 </li>
-                <li id="showOrders" class="disabled" data-toggle="tooltip"  data-placement="bottom" data-original-title="Musisz się zaglogować">
-                  <a href="#">Zobacz liste moich zakupów</a>
+                <li  id="showOrders" class="disabled" data-toggle="tooltip"  data-placement="bottom" data-original-title="Musisz się zaglogować">
+                  <a onclick="showOrders()" href="#">Zobacz liste moich zakupów</a>
                 </li>
              <ul class="nav navbar-nav" id="showAllOrders">
                        <li class="disabled" class="dropdown pull-right" data-toggle="tooltip"  data-placement="bottom" data-original-title="Musisz się zaglogować jako administrator">
                          <a class="disabled" href="#" data-toggle="dropdown" class="dropdown-toggle" style="padding:10px 10px;">Zarządzaj filmami<strong class="caret"></strong></a>
                         <ul class="dropdown-menu">
-                          <li><a onclick="showAll()" href="#">Zobacz wszystkie zakupione</a> </li>
+                          <li><a onclick="showAllOrders()" href="#">Zobacz wszystkie zakupione</a> </li>
                           <li><a onclick="addMovie()" href="#">Dodaj nowy film</a></li>
                           <li><a onclick="movieManage()" href="#">Zarządzaj filmami</a></li>
                         </ul>
@@ -123,7 +123,7 @@
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
 
-        // Ładuje wszystkie funkcje obsługujące stronę
+        <!-- Ładuje wszystkie funkcje obsługujące stronę-->
         <script src="js/functions.js"> </script>
         <script type="text/javascript">
         // Ładuj obsłgue tooltipów (podpowiedzi)
