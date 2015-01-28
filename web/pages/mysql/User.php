@@ -37,10 +37,15 @@ class User {
 		
 		return $result->theResult;
 	}
-	//pobieranei filmu po id
+	//pobieranei nazwy po id
 	function getById($userId){
 
 		return $this->db->query("SELECT * FROM `users` WHERE `id`='$userId'")->getResult();
+	}
+	//pobieranei id użytkownika po nazwie
+	function getById($username){
+
+		return $this->db->query("SELECT * FROM `users` WHERE `username`='$username'")->getResult();
 	}
 }
 
