@@ -17,4 +17,4 @@ echo json_encode($data);
 
 //Ustawianie danych sesji
 $_SESSION["isLogged"] = "1";
-$_SESSION["username"] = $_POST['username'];
+$_SESSION["username"] = $_POST['reg_username'];

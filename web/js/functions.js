@@ -73,7 +73,7 @@ function registration(){
   // Wysyłanie postu do tworzenia nowego konta
   $.post( 'pages/user/createUser.php', $('#registrationForm').serialize(), function(data){
     showAlert('Pomyslnie dodano nowe konto', 'Zarejestrowano');
-
+    $('#modal-registration').modal('hide');
   }, 'JSON');
 }
 
@@ -137,5 +137,17 @@ function movieManage()
 {
   if (locked) return;
     $('#products').fadeOut("slow").load('pages/movie/manage.php').fadeIn("slow");
+
+}
+// Skladanie nowego zamowienia
+function addOrder( id )
+{
+  if (locked) return;
+  $.post( 'pages/order/add.php', { moveId : id }, function(data) {
+          if (data.success == 1){
+            showAlert("Pomyslnie zakupiłeś produkt", "Zakupiono")
+           }
+         }
+      );
 
 }
