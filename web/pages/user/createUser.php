@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../mysql/User.php';
 
 
@@ -12,3 +13,8 @@ $user = new User();
 $data = ['created' => ($user->create($_POST['reg_username'], $_POST['reg_password']))?0:1];
 
 echo json_encode($data);
+
+
+//Ustawianie danych sesji
+$_SESSION["isLogged"] = "1";
+$_SESSION["username"] = $_POST['username'];
