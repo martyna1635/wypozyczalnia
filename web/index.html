@@ -27,58 +27,56 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
-      </div>
+      <!-- pages/navigation.html
+      ELEMENT ŁADOWANY PO ZAŁADOWANIU JQUERY (na dole skrypt ładujący) -->
+
     </nav>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-      </div>
-    </div>
+
 
     <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+      <div class="row clearfix">
+        <div class="col-md-12 column">
+        <ul class="nav nav-tabs">
+                <li class="active">
+                  <a href="#">Strona główna</a>
+                </li>
+                <li class="disabled" data-toggle="tooltip"  data-placement="bottom" data-original-title="Musisz się zaglogować">
+                  <a href="#">Zobacz liste moich zakupów</a>
+                </li>
+                <li class="disabled" data-toggle="tooltip"  data-placement="bottom" data-original-title="Musisz się zaglogować jako administrator">
+                  <a href="#">Zobacz listę wszystkich zakupów</a>
+                </li>
+                <li class="dropdown pull-right">
+                   <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown<strong class="caret"></strong></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#">Action</a>
+                    </li>
+                    <li>
+                      <a href="#">Another action</a>
+                    </li>
+                    <li>
+                      <a href="#">Something else here</a>
+                    </li>
+                    <li class="divider">
+                    </li>
+                    <li>
+                      <a href="#">Separated link</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+          <div class="page-header">
+          <h1>
+            Strona z filmami <small>Wybierz i kup film</small>
+          </h1>
         </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <div class="row" id="products">
+            <!-- Produkty ładowane przez jQuery z użyciem ajaxa (na dole strony skrypt ładujący) -->
+          </div>
         </div>
-      </div>
+    </div>
 
       <hr>
 
@@ -86,11 +84,139 @@
         <p>&copy; Company 2014</p>
       </footer>
     </div> <!-- /container -->     
+
+    <!-- Modalne okno rejestracji -->
+        <div class="modal fade" id="modal-registration" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">
+                  Rejestruj nowe konto
+                </h4>
+              </div>
+              <div class="modal-body">
+                
+                      <form role="form" id="registrationForm">
+                        <div class="form-group">
+                           <label for="reg_username">Podaj nazwę użykownika:</label>
+                           <input type="text" class="form-control" name="reg_username" id="reg_username" required oninput="checkLogin(this)"/>
+                        </div>
+                        <div class="form-group">
+                           <label for="reg_password">Podaj hasło</label>
+                           <input type="password" class="form-control" name="reg_password" id="reg_password" required/>
+                        </div>
+                          <div class="form-group">
+                           <label for="reg_password_check">Powtórz hasło</label>
+                           <input type="password" class="form-control" name="reg_password_check" id="reg_password_check" required oninput="checkPasswords(this)"/>
+                        </div>
+                        <!-- Potrzebny ten input (mimo tego ze wysyłamy ajax'em prze jQuery), aby wykorzystac pokazywanie błędów przez HTML5 -->
+                        <input type="submit" style="display:none">
+                      </form>
+                   
+              </div>
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                 <button type="button" class="btn btn-primary" onclick="registration()">Rejestruj</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <!-- Ładowanie skryptów -->
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
 
         <script src="js/vendor/bootstrap.min.js"></script>
-
         <script src="js/main.js"></script>
 
+        <script>
+        // Ładuj obsłgue tooltipów (podpowiedzi)
+          $(document).ready(function(){
+              $('[data-toggle="tooltip"]').tooltip();   
+          });
+
+          function loadNavigation(){
+            $('nav').load('/pages/navigation.php');
+          }
+          function loadProducts(){
+            $('#products').load('/pages/products.php');
+          }
+          //Pokazywanie błędow np. login jest zajęty przy rejestracji -->
+          function showRegError(){
+            var $myForm = $('#registrationForm')
+                            if (!$myForm[0].checkValidity()) {
+                              // If the form is invalid, submit it. The form won't actually submit;
+                              // this will just cause the browser to display the native HTML5 error messages.
+                              $myForm.find(':submit').click()
+                            }
+          }
+
+          function showLoginError(){
+            var $myForm = $('form#loginForm');
+            if (!$myForm[0].checkValidity()) {
+                              $myForm.find(':submit').click();
+                              return false;
+            }
+            return true;
+          }
+          loadNavigation();
+          loadProducts();
+
+          // Funkcja wykorzystująca możliwosci HTML5 do sprawdzania czy hasła są takie same przy rejestracji
+          function checkPasswords(input) {
+              if (input.value != document.getElementById('reg_password').value) {
+                  input.setCustomValidity('Hasła muszą byc takie same!');
+              } else {
+                  // input is valid -- reset the error message
+                  input.setCustomValidity('');
+             }
+          
+          }
+          // Funkcja sprawdzająca czy login jest wolny
+          function checkLogin(input) {
+
+              if (input.value.length > 3){
+                  $.getJSON( "/pages/checkUserName.php?"+input.value, 
+                    function( data )
+                    {    
+                      // Pobieramy dane ze strony PHP (która łączy się z baza danych i daje nam odpowiedź czy login jest juz w bazie)
+                      if (data.isFree != 1)
+                      {
+                          //Wykorzusyujemy dobrodziejstwa HTML5 (niestety prawdopodbnie strona będzie dzialac poprawnie tylko na CHROMIE)
+                          input.setCustomValidity('Ten login jest zajęty'); 
+                          showRegError();
+                      } else {
+                            // input is valid -- reset the error message
+                            input.setCustomValidity('');
+                       }
+                        });
+                }
+          
+          }
+
+          // Funkcja wysyłające dane do rejestracji
+          function registration(){
+            showRegError();
+            // sprawdzamy czy hasła sa takie same
+           // checkPasswords();
+          }
+
+          // funkcja odpowiedzialna za logowanie
+          function login(){
+            if (!showLoginError())
+              return;
+              $.post( 'pages/logincheck.php', $('form#loginForm').serialize(), function(data) {
+                   // Jeśli pomyślnie się zalogowalismy przeładuj pasek navigation.php
+                   if (data.success != 1){
+                    // Wyswietl że błędny login lub hasło (działa prawdopodobnie tylok na chromie)
+                      document.getElementById('password').setCustomValidity('Błędny login lub hasło');
+                      showLoginError();
+                   }
+                 },
+                 'json' // I expect a JSON response
+              );
+          }
+        </script
     </body>
 </html>
