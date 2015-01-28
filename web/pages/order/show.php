@@ -25,8 +25,8 @@ $i = 0;
 				<?php
 				foreach ($orders as $order) {
 					++$i;
-					$username = $user->getById($order['userd_id']);
-					$title = $movie->getById($order['movie_id']);
+					$username = $user->getById($order['userd_id'])[0]['username'];
+					$title = $movie->getById($order['movie_id'])[0]['title'];
 
 					?>
 					

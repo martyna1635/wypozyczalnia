@@ -83,8 +83,6 @@ class MyResult {
   // wyswietla wynik w formie tablicy
   function getResult() {
       $rows = array();
-      if ($this->num_rows == 0)
-        return $this->theResult;
       while ($row = mysqli_fetch_assoc($this->theResult)) {
           $rows[] = $row;
       }
