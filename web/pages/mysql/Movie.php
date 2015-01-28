@@ -22,5 +22,9 @@ class Movie {
 		return $this->db->query("SELECT * FROM `movies`")->getResult();
 	}
 
+	//pobieranei filmu po id
+	function getById($movieId){
 
+		return $this->db->query("SELECT * FROM `movies` WHERE `id`='$movieId'")->getResult();
+	}
 }
