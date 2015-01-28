@@ -17,7 +17,8 @@ session_start();
                   <input type="text" name="username" required placeholder="Podaj nazwę użytkownika" class="form-control">
                 </div>
                 <div class="form-group">
-                  <input type="password" id='password' name="password" required placeholder="Password" class="form-control">
+
+                  <input type="password" id='password' name="password" required placeholder="Password" class="form-control" oninput="this.setCustomValidity('');">
                 </div>
                 <input type="submit" style="display:none;">
                 <!-- Używa skryptów do logowania ze strony głównej [login()] (index.html) -->
