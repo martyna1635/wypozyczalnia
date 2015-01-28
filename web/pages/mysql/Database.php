@@ -80,10 +80,14 @@ class MyResult {
                 }
         }
   
-  // pobierz asocjacyjną tablicę wyników (przetwarza naraz jeden wiersz)  
-  function fetch_assoc() {
-    $newRow = mysqli_fetch_assoc($this->theResult);
-        return $newRow;
-        }
+  // wyswietla wynik w formie tablicy
+  function getResult() {
+      $rows = array();
+
+      while ($row = mysqli_fetch_assoc($this->theResult)) {
+          $rows[] = $row;
+      }
+      return $rows;
+    }
   }
 ?>
