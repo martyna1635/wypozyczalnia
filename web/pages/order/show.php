@@ -3,6 +3,8 @@ require '../mysql/Order.php';
 require '../mysql/User.php';
 require '../mysql/Movie.php';
 
+$user = new User();
+$movie = new Movie();
 $order = new Order();
 if ($_GET['all'] == 0)
 	$orders = $order->getAll(); else
@@ -23,15 +25,16 @@ $i = 0;
 				<?php
 				foreach ($orders as $order) {
 					++$i;
-					$username = 'test';
-					$movie = "test2";
+					$username = $user->getById($order['userd_id']);
+					$title = $movie->getById($order['movie_id']);
+
 					?>
 					
 						<tbody>
 							<tr>
 								<td><?=$i?></td>
 								<td><?=$username?></td>
-								<td><?=$movie?></td>
+								<td><?=$title?></td>
 								<td><?=$order['date']?></td>
 							</tr>
 						<?php
