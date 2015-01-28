@@ -1,7 +1,7 @@
 <?PHP
 // Umportowanie klasy user
 session_start();
-require 'mysql/User.php';
+require '../mysql/User.php';
 // Ustawianie nagłówków dla ajax (json)
 header('Content-Type: application/json');
 
