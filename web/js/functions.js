@@ -11,7 +11,9 @@ function loadNavigation(){
 }
 function loadProducts(){
 
-  $('#products').load('/pages/movie/products.php');
+  $('#products').load('/pages/movie/products.php', function(){$('div div.thumbnail').mouseenter(function(){if(!locked) $('div.hover', this).show();}).mouseleave( function(){$( 'div.hover', this).hide();} );
+});
+
 }
 //Pokazywanie błędow np. login jest zajęty przy rejestracji -->
 function showRegError(){
@@ -144,11 +146,11 @@ function addMovie()
          }
        });
 }
-function movieManage()
+function deleteMovie( id )
 {
   if (locked) return;
-    $('#products').hide();
-    $('#products').load('pages/movie/manage.php').fadeIn("slow");
+    $('#t'+id).fadeOut("slow");
+    $.get('pages/movie/delete.php?id='+id);
 
 }
 // Skladanie nowego zamowienia
@@ -172,7 +174,7 @@ function unlockMenu()
   $('#showAllOrders li a').attr('class', '');
   $('#showOrders').attr('class', '')
                           .removeAttr( "data-original-title" );
-
+ 
 }
 
 //odblokowywanie menu

@@ -6,8 +6,9 @@ $movies = $movie->getAll();
 
 foreach ($movies as $movie) {
 ?>
-   <div class="col-md-4">
+   <div id="t<?=$movie['id']?>" class="col-md-4">
               <div class="thumbnail">
+              <div class="hover" style="position: absolute; padding-left: 92%;display:none;"><a href="#" onclick="deleteMovie(<?=$movie['id']?>)" class="btn btn-danger btn-xs"> × </a></div>
                 <img alt="300x200" src="http://lorempixel.com/600/200/people" />
                 <div class="caption">
                   <h3>
@@ -29,3 +30,6 @@ foreach ($movies as $movie) {
             </div>
 <?php
 }
+
+
+?>
