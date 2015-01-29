@@ -135,7 +135,7 @@
                 <div class="form-group">
                   <label class="col-md-2 control-label" for="title">Tytuł</label>  
                   <div class="col-md-7">
-                  <input id="title" name="movie_title" type="text" placeholder="Tytuł filmu" class="form-control input-md" required="">
+                  <input id="title" name="movie_title" type="text" placeholder="Tytuł filmu" class="form-control input-md" required>
                     
                   </div>
                 </div>
@@ -144,7 +144,7 @@
                 <div class="form-group">
                   <label class="col-md-2 control-label" for="price">Cena</label>  
                   <div class="col-md-7">
-                  <input id="price" name="movie_price" type="text" placeholder="Cena filmu" class="form-control input-md" required="">
+                  <input id="price" name="movie_price" type="number" step="0.01" placeholder="Cena filmu" class="form-control input-md" required>
                     
                   </div>
                 </div>
@@ -152,11 +152,11 @@
                 <!-- Textarea -->
                 <div class="form-group">
                   <label class="col-md-2 control-label" for="description">Opis</label>
-                  <div class="col-md-7">                     
+                  <div class="col-md-9">                     
                     <textarea class="form-control" id="description" name="movie_description">Opis filmu</textarea>
                   </div>
                 </div>
-
+                <input type=submit style="display:none;">
                 </fieldset>
                 </form>
 

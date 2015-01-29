@@ -135,8 +135,13 @@ function showAllOrders()
 function addMovie()
 {
   if (locked) return;
-    //chowa okno modalne
-
+    //sprawdza dane
+  var $myForm = $('#movieForm')
+  if (!$myForm[0].checkValidity()) {
+    // If the form is invalid, submit it. The form won't actually submit;
+    // this will just cause the browser to display the native HTML5 error messages.
+    $myForm.find(':submit').click();
+  } else {
     //Wysyla zapytanie tworzace nowy film
     $.post('pages/movie/add.php', $('form#movieForm').serialize(),  function(data) {
          if (data.created == 1){
@@ -145,13 +150,14 @@ function addMovie()
           loadProducts();
          }
        });
+  }
 }
 function deleteMovie( id )
 {
   if (locked) return;
     $('#t'+id).fadeOut("slow");
     $.get('pages/movie/delete.php?id='+id);
-
+    showAlert("Pomyslnie usunięto produkt", "Usunięto");
 }
 // Skladanie nowego zamowienia
 function addOrder( id )
@@ -159,7 +165,8 @@ function addOrder( id )
   if (locked) return;
   $.post( 'pages/order/add.php', { movieId : id }, function(data) {
           if (data.created == 1){
-            showAlert("Pomyslnie zakupiłeś produkt", "Zakupiono")
+            showAlert("Pomyslnie zakupiłeś produkt", "Zakupiono");
+            showOrders();
            }
          }
       );
