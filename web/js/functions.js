@@ -157,8 +157,8 @@ function deleteMovie( id )
 function addOrder( id )
 {
   if (locked) return;
-  $.post( 'pages/order/add.php', { moveId : id }, function(data) {
-          if (data.success == 1){
+  $.post( 'pages/order/add.php', { movieId : id }, function(data) {
+          if (data.created == 1){
             showAlert("Pomyslnie zakupiłeś produkt", "Zakupiono")
            }
          }

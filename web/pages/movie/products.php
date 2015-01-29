@@ -23,7 +23,7 @@ foreach ($movies as $movie) {
                 </p>
 
                   <p>
-                    <a onlick="addOrder(<?=$movie['id']?>)" class="btn btn-primary" href="#">Zakup film</a> 
+                    <a onclick="addOrder(<?=$movie['id']?>)" class="btn btn-primary" href="javascript:void(0);">Zakup film</a> 
                   </p>
                 </div>
               </div>
