@@ -14,13 +14,13 @@ CREATE TABLE `movies` (
   PRIMARY KEY  (`id`)
 );
 
-CREATE TABLE `orders` (
+CREATE TABLE `users_movies` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `userd_id` INT,
   `movie_id` INT,
   PRIMARY KEY  (`id`)
 );
 
-ALTER TABLE `orders` ADD CONSTRAINT `orders_fk1` FOREIGN KEY (`userd_id`) REFERENCES users(`id`) ON DELETE CASCADE;
-ALTER TABLE `orders` ADD CONSTRAINT `orders_fk2` FOREIGN KEY (`movie_id`) REFERENCES movies(`id`) ON DELETE CASCADE;
+ALTER TABLE `users_movies` ADD CONSTRAINT `orders_fk1` FOREIGN KEY (`userd_id`) REFERENCES users(`id`) ON DELETE CASCADE;
+ALTER TABLE `users_movies` ADD CONSTRAINT `orders_fk2` FOREIGN KEY (`movie_id`) REFERENCES movies(`id`) ON DELETE CASCADE;

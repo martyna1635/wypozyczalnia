@@ -10,7 +10,7 @@ class Order {
 
 	//funkcja tworząca nowe zamowienie
 	function create( $userId, $movieId){
-		if ($this->db->query("INSERT INTO `orders` (`userd_id`, `movie_id`) VALUES ('$userId', '$movieId');"))
+		if ($this->db->query("INSERT INTO `users_movies` (`userd_id`, `movie_id`) VALUES ('$userId', '$movieId');"))
 			return true; else
 			return false;
 
@@ -18,12 +18,12 @@ class Order {
 	//pobieramy wszystkie zamowienia (tylko dla admina)
 	function getAll(){
 
-		return $this->db->query("SELECT * FROM `orders`")->getResult();
+		return $this->db->query("SELECT * FROM `users_movies`")->getResult();
 	}
 	//pobieramy zamowniea konkretnego użytkownika
 	function getUserAll($userId){
 
-		return $this->db->query("SELECT * FROM `orders` WHERE `userd_id` = '$userId'")->getResult();
+		return $this->db->query("SELECT * FROM `users_movies` WHERE `userd_id` = '$userId'")->getResult();
 	}
 
 

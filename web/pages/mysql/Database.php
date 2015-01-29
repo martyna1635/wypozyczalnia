@@ -1,6 +1,4 @@
 <?php
-ini_set( 'display_errors', 'On' ); 
-error_reporting( E_ALL );
 class Database {
 
   protected $host;
@@ -13,10 +11,10 @@ class Database {
 
 // Ustawienia do połączenia
   function __construct(){
-    $this->host = '127.0.0.1';
-    $this->user = 'user';
-    $this->pwd = 'user';
-    $this->dbName = 'shopobiektowo';
+    $this->host = '10.254.94.2';
+    $this->user = 's173529';
+    $this->pwd = 'Parkowa3';
+    $this->dbName = 's173529';
     
     $this->connect();
     }
