@@ -1,17 +1,23 @@
+//Zmienne do blokowania dodatkowych opcji
 var reload = false;
 var locked = true;
+
+//zmienna zalezna na jakim serwerze jestesmy
+// Cos na vie zle strona przetwarzala adres (nie dodawala ~nrIndeksu
+var src = "http://v-ie.uek.krakow.pl/~s173529/";
+
 function loadNavigation(){
   if (reload)
-    $('nav').hide().load('/pages/navigation.php').fadeIn('slow');
+    $('nav').hide().load(src+'pages/navigation.php').fadeIn('slow');
     else
-    $('nav').load('/pages/navigation.php');
+    $('nav').load(src+'pages/navigation.php');
 
 
     
 }
 function loadProducts(){
 
-  $('#products').load('/pages/movie/products.php', function(){$('div div.thumbnail').mouseenter(function(){if(!locked) $('div.hover', this).show();}).mouseleave( function(){$( 'div.hover', this).hide();} );
+  $('#products').load(src+'pages/movie/products.php', function(){$('div div.thumbnail').mouseenter(function(){if(!locked) $('div.hover', this).show();}).mouseleave( function(){$( 'div.hover', this).hide();} );
 });
 
 }
@@ -49,7 +55,7 @@ function checkPasswords(input) {
 function checkLogin(input) {
 
     if (input.value.length > 3){
-        $.getJSON( "/pages/user/checkUserName.php?login="+input.value, 
+        $.getJSON(src+"pages/user/checkUserName.php?login="+input.value, 
           function( data )
           {    
             // Pobieramy dane ze strony PHP (która łączy się z baza danych i daje nam odpowiedź czy login jest juz w bazie)
@@ -71,7 +77,7 @@ function checkLogin(input) {
 function registration(){
   showRegError();
   // Wysyłanie postu do tworzenia nowego konta
-  $.post( 'pages/user/createUser.php', $('#registrationForm').serialize(), function(data){
+  $.post( src+'pages/user/createUser.php', $('#registrationForm').serialize(), function(data){
     showAlert('Pomyslnie dodano nowe konto', 'Zarejestrowano');
     $('#modal-registration').modal('hide');
   }, 'JSON');
@@ -81,7 +87,7 @@ function registration(){
 function login(){
   if (!showLoginError())
     return;
-    $.post( 'pages/user/logincheck.php', $('form#loginForm').serialize(), function(data) {
+    $.post( src+'pages/user/logincheck.php', $('form#loginForm').serialize(), function(data) {
          // Jeśli pomyślnie się zalogowalismy przeładuj pasek navigation.php
          if (data.success != 1){
           // Wyswietl że błędny login lub hasło (działa prawdopodobnie tylok na chromie)
@@ -101,7 +107,7 @@ function login(){
 }
 // funkcja odpowiedzialna za wylogowywanie
 function logout(){
-    $.get('pages/user/logout.php');
+    $.get(src+'pages/user/logout.php');
     showAlert('Pomyslnie zostałeś wylogowany', 'wylogowano');
 
     reload = true;
@@ -123,13 +129,13 @@ function showOrders()
   // Jesli menu jest zablokowane to nie rób nic
   if (locked) return;
     $('#products').hide();
-    $('#products').load('pages/order/show.php?all=0').fadeIn("slow");
+    $('#products').load(src+'pages/order/show.php?all=0').fadeIn("slow");
 }
 function showAllOrders()
 {
   if (locked) return;
     $('#products').hide();
-    $('#products').load('pages/order/show.php?all=1').fadeIn("slow");
+    $('#products').load(src+'pages/order/show.php?all=1').fadeIn("slow");
 }
 // Dodawanie nowego filmu
 function addMovie()
@@ -143,7 +149,7 @@ function addMovie()
     $myForm.find(':submit').click();
   } else {
     //Wysyla zapytanie tworzace nowy film
-    $.post('pages/movie/add.php', $('form#movieForm').serialize(),  function(data) {
+    $.post(src+'pages/movie/add.php', $('form#movieForm').serialize(),  function(data) {
          if (data.created == 1){
           showAlert('Pomyslnie dodałeś nowy produkt', 'Dodano nowy produkt');
           $('#modal-movie').modal('hide');
@@ -156,14 +162,14 @@ function deleteMovie( id )
 {
   if (locked) return;
     $('#t'+id).fadeOut("slow");
-    $.get('pages/movie/delete.php?id='+id);
+    $.get(src+'pages/movie/delete.php?id='+id);
     showAlert("Pomyslnie usunięto produkt", "Usunięto");
 }
 // Skladanie nowego zamowienia
 function addOrder( id )
 {
   if (locked) return;
-  $.post( 'pages/order/add.php', { movieId : id }, function(data) {
+  $.post(src+ 'pages/order/add.php', { movieId : id }, function(data) {
           if (data.created == 1){
             showAlert("Pomyslnie zakupiłeś produkt", "Zakupiono");
             showOrders();
