@@ -1,7 +1,5 @@
 var reload = false;
-// zmienna do blokowania menu
 var locked = true;
-
 function loadNavigation(){
   if (reload)
     $('nav').hide().load('/pages/navigation.php').fadeIn('slow');
@@ -9,7 +7,7 @@ function loadNavigation(){
     $('nav').load('/pages/navigation.php');
 
 
-    $('#showOrders').attr('class', (locked)?'disabled':'');
+    
 }
 function loadProducts(){
 
@@ -90,8 +88,8 @@ function login(){
             //setTimeout(function(){document.getElementById('password').setCustomValidity('')}, 2000);
          } else if (data.success == 1){
             reload = true;
-            //został zalogowany, może korzystać z dodtakowych opcji w menu
-            locked = false;
+            //odblokuj menu
+            unlockMenu();
             //Przeładuj pasek nawigacji
             loadNavigation();
          }
@@ -105,7 +103,8 @@ function logout(){
     showAlert('Pomyslnie zostałeś wylogowany', 'wylogowano');
 
     reload = true;
-    locked = true;
+    //Zablokuj menu
+    lockMenu();
     loadNavigation();
 }
 //funkcja wyświetlająca aktualne wiadomośc (np. wylogowano)
@@ -121,12 +120,12 @@ function showOrders()
 {
   // Jesli menu jest zablokowane to nie rób nic
   if (locked) return;
-    $('#products').fadeOut("slow").load('pages/orders/show.php').fadeIn("slow");
+    $('#products').fadeOut("slow").load('pages/order/show.php').fadeIn("slow");
 }
 function showAllOrders()
 {
   if (locked) return;
-    $('#products').fadeOut("slow").load('pages/orders/show.php?all=1').fadeIn("slow");
+    $('#products').fadeOut("slow").load('pages/order/show.php?all=1').fadeIn("slow");
 }
 function addMovie()
 {
@@ -149,5 +148,28 @@ function addOrder( id )
            }
          }
       );
+}
+
+//odblokowywanie menu
+function unlockMenu()
+{
+  locked = false;
+  $('#showAllOrders li').attr('class', '')
+                        .removeAttr( "data-original-title" );
+  $('#showAllOrders li a').attr('class', '');
+  $('#showOrders').attr('class', '')
+                          .removeAttr( "data-original-title" );
+
+}
+
+//odblokowywanie menu
+function lockMenu()
+{
+  locked = true;
+  $('#showAllOrders li').attr('class', 'disabled')
+                        .attr( "data-original-title", 'Musisz się zaglogować jako administrator' );
+  $('#showAllOrders li a').attr('class','disabled');
+  $('#showOrders').attr('class', 'disabled')
+                          .attr( "data-original-title", 'Musisz się zaglogować' );
 
 }

@@ -11,6 +11,7 @@ session_start();
        if ($_SESSION["isLogged"] != 1) 
         {
         ?>   
+           
             <div id="navbar" class="navbar-collapse collapse">
               <form class="navbar-form navbar-right" role="form" id="loginForm">
                 <div class="form-group">
@@ -27,6 +28,7 @@ session_start();
                 <a id="modal-registrationA" href="#modal-registration" role="button" data-toggle="modal" class="btn btn-success">Zarejestruj się</a>
               </form>
           <?php }else { ?>
+          <script>unlockMenu();</script>
               <ul class="nav navbar-nav navbar-right">
                  <li class="dropdown pull-right">
                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Akcje<strong class="caret"></strong></a>
