@@ -1,4 +1,4 @@
-<?
+<?php
 //import bilbioteki movie
 require '../mysql/Movie.php';
 
