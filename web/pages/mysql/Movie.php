@@ -27,4 +27,8 @@ class Movie {
 
 		return $this->db->query("SELECT * FROM `movies` WHERE `id`='$movieId'")->getResult();
 	}
+	function delete($userId){
+
+		return $this->db->query("DELETE FROM `movies` WHERE `movies`.`id` = '$userId'");
+	}
 }
