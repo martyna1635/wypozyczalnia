@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../mysql/Movie.php';
 
 $movie = new Movie();
