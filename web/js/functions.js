@@ -120,22 +120,35 @@ function showOrders()
 {
   // Jesli menu jest zablokowane to nie rób nic
   if (locked) return;
-    $('#products').fadeOut("slow").load('pages/order/show.php').fadeIn("slow");
+    $('#products').hide();
+    $('#products').load('pages/order/show.php?all=0').fadeIn("slow");
 }
 function showAllOrders()
 {
   if (locked) return;
-    $('#products').fadeOut("slow").load('pages/order/show.php?all=1').fadeIn("slow");
+    $('#products').hide();
+    $('#products').load('pages/order/show.php?all=1').fadeIn("slow");
 }
+// Dodawanie nowego filmu
 function addMovie()
 {
   if (locked) return;
-    $('#products').fadeOut("slow").load('pages/movie/add.php').fadeIn("slow");
+    //chowa okno modalne
+
+    //Wysyla zapytanie tworzace nowy film
+    $.post('pages/movie/add.php', $('form#movieForm').serialize(),  function(data) {
+         if (data.created == 1){
+          showAlert('Pomyslnie dodałeś nowy produkt', 'Dodano nowy produkt');
+          $('#modal-movie').modal('hide');
+          loadProducts();
+         }
+       });
 }
 function movieManage()
 {
   if (locked) return;
-    $('#products').fadeOut("slow").load('pages/movie/manage.php').fadeIn("slow");
+    $('#products').hide();
+    $('#products').load('pages/movie/manage.php').fadeIn("slow");
 
 }
 // Skladanie nowego zamowienia

@@ -9,7 +9,7 @@ CREATE TABLE `users` (
 CREATE TABLE `movies` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` TEXT(255) CHARACTER SET utf8 COLLATE utf8_polish_ci,
-  `desciption` TEXT(1000) CHARACTER SET utf8 COLLATE utf8_polish_ci,
+  `description` TEXT(1000) CHARACTER SET utf8 COLLATE utf8_polish_ci,
   `price` DECIMAL(10,2),
   PRIMARY KEY  (`id`)
 );

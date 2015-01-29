@@ -49,7 +49,7 @@
                          <a class="disabled" href="#" data-toggle="dropdown" class="dropdown-toggle" style="padding:10px 10px;">Zarządzaj filmami<strong class="caret"></strong></a>
                         <ul class="dropdown-menu">
                           <li><a onclick="showAllOrders()" href="#">Zobacz wszystkie zakupione</a> </li>
-                          <li><a onclick="addMovie()" href="#">Dodaj nowy film</a></li>
+                          <li><a id="modal-movieA" href="#modal-movie" role="button" data-toggle="modal" href="#">Dodaj nowy film</a></li>
                           <li><a onclick="movieManage()" href="#">Zarządzaj filmami</a></li>
                         </ul>
                       </li>
@@ -117,6 +117,60 @@
           </div>
         </div>
 
+    <!-- Modalne okno nowego filmu -->
+        <div class="modal fade" id="modal-movie" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">
+                  Dodaj nowy film
+                </h4>
+              </div>
+              <div class="modal-body">
+                
+                    <form class="form-horizontal" id="movieForm">
+                <fieldset>
+
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-2 control-label" for="title">Tytuł</label>  
+                  <div class="col-md-7">
+                  <input id="title" name="movie_title" type="text" placeholder="Tytuł filmu" class="form-control input-md" required="">
+                    
+                  </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-2 control-label" for="price">Cena</label>  
+                  <div class="col-md-7">
+                  <input id="price" name="movie_price" type="text" placeholder="Cena filmu" class="form-control input-md" required="">
+                    
+                  </div>
+                </div>
+
+                <!-- Textarea -->
+                <div class="form-group">
+                  <label class="col-md-2 control-label" for="description">Opis</label>
+                  <div class="col-md-7">                     
+                    <textarea class="form-control" id="description" name="movie_description">Opis filmu</textarea>
+                  </div>
+                </div>
+
+                </fieldset>
+                </form>
+
+                   
+              </div>
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                 <button type="button" class="btn btn-primary" onclick="addMovie()">Dodaj nowy film</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
         <!-- Ładowanie skryptów -->
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
 

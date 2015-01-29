@@ -10,7 +10,7 @@ $movie = new Movie();
 
 // Zwraca 0 lub 1 jeśli pomyslnie utworzono
 $data = [
-	'created' => ($movie->create($_POST['movie_title'], $_POST['movie_description'], $_POST['movie_price']))?0:1
+	'created' => ($movie->create($_POST['movie_title'], $_POST['movie_description'], $_POST['movie_price']))?1:0
 	];
 
 echo json_encode($data);
