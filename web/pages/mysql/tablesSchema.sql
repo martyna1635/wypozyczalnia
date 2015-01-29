@@ -22,5 +22,5 @@ CREATE TABLE `orders` (
   PRIMARY KEY  (`id`)
 );
 
-ALTER TABLE `orders` ADD CONSTRAINT `orders_fk1` FOREIGN KEY (`userd_id`) REFERENCES users(`id`);
-ALTER TABLE `orders` ADD CONSTRAINT `orders_fk2` FOREIGN KEY (`movie_id`) REFERENCES movies(`id`);
+ALTER TABLE `orders` ADD CONSTRAINT `orders_fk1` FOREIGN KEY (`userd_id`) REFERENCES users(`id`) ON DELETE SET NULL;
+ALTER TABLE `orders` ADD CONSTRAINT `orders_fk2` FOREIGN KEY (`movie_id`) REFERENCES movies(`id`) ON DELETE SET NULL;
